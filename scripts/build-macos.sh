@@ -2,12 +2,10 @@
 set -ex
 
 brew install coreutils
+. "$(dirname "$0")"/prepare-env.sh
 cd ./node
 
-PREFIX="${WORKSPACE}/artifacts/"
-mkdir -p "${PREFIX}"
+./configure --prefix=$OUTPUT_PREFIX --shared
 
-./configure --prefix=$PREFIX --shared
-
-make -j${WORKER_COUNT}
+make -j`sysctl -n hw.ncpu`
 make install
