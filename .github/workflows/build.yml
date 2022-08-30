@@ -1,0 +1,44 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  NODE_VERSION: "v16.17.0"
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        arch: [x64]
+        # os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download source code
+        run: ./scripts/download.sh
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: ./node/out
+          key: node-${{ env.NODE_VERSION }}-out-${{ runner.os }}-${{ matrix.arch }}
+      - name: Build
+        run: |
+          if [ "$RUNNER_OS" == "Linux" ]; then
+            ./scripts/build-linux.sh
+          elif [ "$RUNNER_OS" == "Windows" ]; then
+            ./scripts/build-windows.sh
+          else
+            ./scripts/build-macos.sh
+          fi
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: libnode-${{ env.NODE_VERSION }}-${{ runner.os }}-${{ matrix.arch }}.zip
+          path: ./artifacts

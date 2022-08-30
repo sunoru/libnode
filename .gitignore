@@ -1,0 +1,6 @@
+*.swp
+
+*.tar.gz
+node/
+node-*/
+/artifacts/
