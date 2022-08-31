@@ -7,5 +7,5 @@ cd ./node
 
 ./vcbuild.bat release dll package
 
-mv ./out/Release/* "${OUTPUT_PREFIX}/"
+mv ./out/Release/node-${NODE_VERSION}-win-x64 "${OUTPUT_PREFIX}/"
 cp ./LICENSE "${OUTPUT_PREFIX}/LICENSE"

@@ -23,11 +23,6 @@ jobs:
       - name: Download source code
         shell: bash
         run: ./scripts/download.sh
-      - name: Cache
-        uses: actions/cache@v2
-        with:
-          path: ./node/out
-          key: node-${{ env.NODE_VERSION }}-out-${{ runner.os }}-${{ matrix.arch }}
       - name: Build
         shell: bash
         run: |
