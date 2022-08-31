@@ -16,8 +16,7 @@ jobs:
     strategy:
       matrix:
         arch: [x64]
-        # os: [ubuntu-latest, windows-latest, macos-latest]
-        os: [macos-latest]
+        os: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -40,5 +39,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2.3.1
         with:
-          name: libnode-${{ env.NODE_VERSION }}-${{ runner.os }}-${{ matrix.arch }}.zip
+          name: libnode-${{ env.NODE_VERSION }}-${{ runner.os }}-${{ matrix.arch }}
           path: ./artifacts

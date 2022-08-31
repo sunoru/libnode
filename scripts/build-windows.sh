@@ -1,12 +1,10 @@
 #!/bin/bash
 set -ex
 
-brew install coreutils
 . "$(dirname "$0")"/prepare-env.sh
 cd ./node
 
-./configure --prefix=$OUTPUT_PREFIX --shared
+./vcbuild.bat release dll package
 
-make -j`sysctl -n hw.ncpu`
-make install
+mv ./out/Release/* "${OUTPUT_PREFIX}/"
 cp ./LICENSE "${OUTPUT_PREFIX}/LICENSE"
