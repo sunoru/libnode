@@ -21,6 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Download source code
+        shell: bash
         run: ./scripts/download.sh
       - name: Cache
         uses: actions/cache@v2
