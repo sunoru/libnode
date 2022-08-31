@@ -28,6 +28,7 @@ jobs:
           path: ./node/out
           key: node-${{ env.NODE_VERSION }}-out-${{ runner.os }}-${{ matrix.arch }}
       - name: Build
+        shell: bash
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
             ./scripts/build-linux.sh
