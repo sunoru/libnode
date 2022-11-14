@@ -14,9 +14,10 @@ env:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         arch: [x64]
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [macos-latest, ubuntu-latest, windows-2019]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
