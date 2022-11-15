@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: build.yml
+      - name: Make archives
+        run: |
+          for dir in */; do
+            ( zip -r ./"${dir%/}".zip "$dir" )
+          done
+      - name: Create releases
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "./*.zip"
+          generate_release_notes: true
