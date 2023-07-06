@@ -1,11 +1,10 @@
 #!/bin/bash
 set -ex
 
-. "$(dirname "$0")"/prepare-env.sh
-cd ./node
+brew install coreutils
 
 ./configure --prefix=$OUTPUT_PREFIX --shared
 
-make -j`nproc`
+make -j`sysctl -n hw.ncpu`
 make install
 cp ./LICENSE "${OUTPUT_PREFIX}/LICENSE"
