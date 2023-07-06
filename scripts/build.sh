@@ -2,6 +2,10 @@
 set -ex
 
 SCRIPTS_DIR="$(dirname "$0")"
+case "$SCRIPTS_DIR" in
+    /*) ;;
+    *) SCRIPTS_DIR="$(pwd)/$SCRIPTS_DIR"
+esac
 . $SCRIPTS_DIR/prepare-env.sh
 cd "$NODE_SOURCE_DIR"
 
