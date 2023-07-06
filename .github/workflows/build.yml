@@ -10,7 +10,6 @@ on:
 
 env:
   NODE_VERSION: "v18.16.1"
-  NODE_SOURCE_DIR: "./node"
 
 jobs:
   build:

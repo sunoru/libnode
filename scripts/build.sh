@@ -1,13 +1,9 @@
 #!/bin/bash
 set -ex
 
-SCRIPTS_DIR="$(dirname "$0")"
-case "$SCRIPTS_DIR" in
-    /*) ;;
-    *) SCRIPTS_DIR="$(pwd)/$SCRIPTS_DIR"
-esac
-. $SCRIPTS_DIR/prepare-env.sh
-cd "$NODE_SOURCE_DIR"
+. "$(dirname "$0")"/prepare-env.sh
+SCRIPTS_DIR=$WORKSPACE/scripts
+cd $WORKSPACE/node
 
 if [ "$RUNNER_OS" == "Linux" ]; then
     TARGET_OS="linux"
@@ -19,4 +15,4 @@ else
     echo "Unknown OS: $RUNNER_OS"
     exit 1
 fi
-$SCRIPTS_DIR/build/$TARGET_OS-$TARGET_ARCH.sh
+. $SCRIPTS_DIR/build/$TARGET_OS.sh

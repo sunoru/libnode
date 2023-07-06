@@ -1,8 +1,6 @@
 #!/bin/bash
 set -ex
 
-brew install coreutils
-
 ./configure --prefix=$OUTPUT_PREFIX --shared
 
 make -j`sysctl -n hw.ncpu`
