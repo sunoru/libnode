@@ -18,7 +18,7 @@ env:
 jobs:
   build:
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         arch: [x64]
         os: [macos-latest, ubuntu-latest, windows-2019]
