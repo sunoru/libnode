@@ -32,8 +32,9 @@ jobs:
 
           - arch: x86
             os: windows-2019
-          - arch: x86
-            os: ubuntu-latest
+          # https://github.com/nodejs/node/issues/33019
+          # - arch: x86
+          #   os: ubuntu-latest
 
           - arch: armv7
             os: ubuntu-latest
