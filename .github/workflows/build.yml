@@ -36,8 +36,8 @@ jobs:
           # - arch: x86
           #   os: ubuntu-latest
 
-          - arch: armv7
-            os: ubuntu-latest
+          # - arch: armv7
+          #   os: ubuntu-latest
           - arch: arm64
             os: ubuntu-latest
     runs-on: ${{ matrix.os }}

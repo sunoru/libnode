@@ -10,8 +10,9 @@ else
     DEST_CPU=$TARGET_ARCH
     if [[ "$TARGET_ARCH" == "armv7" ]]; then
         DEST_CPU="arm"
-        sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf \
-            libstdc++-10-dev-armhf-cross gcc-multilib g++-multilib
+        sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
+            # FIXME: gcc-multilib conflicts.
+            # libstdc++-6-dev-armhf-cross gcc-multilib g++-multilib
         export CC=arm-linux-gnueabihf-gcc
         export CXX=arm-linux-gnueabihf-g++
     elif [[ "$TARGET_ARCH" == "x86" ]]; then
