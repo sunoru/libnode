@@ -1,6 +1,9 @@
 #!/bin/bash
 set -ex
 
+export CC_host=gcc
+export CXX_host=g++
+
 if [[ "$TARGET_ARCH" == "x64" ]]; then
     ./configure --prefix=$OUTPUT_PREFIX --shared --no-cross-compiling
 else
