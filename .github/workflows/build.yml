@@ -8,17 +8,41 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   NODE_VERSION: "v20.9.0"
 
 jobs:
   build:
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         arch: [x64]
         os: [macos-latest, ubuntu-latest, windows-2019]
+        include:
+          - arch: x64
+            os: macos-latest
+          - arch: x64
+            os: windows-2019
+          - arch: x64
+            os: ubuntu-latest
+
+          - arch: x86
+            os: windows-2019
+          # https://github.com/nodejs/node/issues/33019
+          # - arch: x86
+          #   os: ubuntu-latest
+
+          # - arch: armv7
+          #   os: ubuntu-latest
+          - arch: arm64
+            os: ubuntu-latest
     runs-on: ${{ matrix.os }}
+    env:
+      TARGET_ARCH: ${{ matrix.arch }}
     steps:
       - uses: actions/checkout@v2
       - name: Download source code
@@ -26,14 +50,7 @@ jobs:
         run: ./scripts/download.sh
       - name: Build
         shell: bash
-        run: |
-          if [ "$RUNNER_OS" == "Linux" ]; then
-            ./scripts/build-linux.sh
-          elif [ "$RUNNER_OS" == "Windows" ]; then
-            ./scripts/build-windows.sh
-          else
-            ./scripts/build-macos.sh
-          fi
+        run: ./scripts/build.sh
       - name: Upload artifacts
         uses: actions/upload-artifact@v2.3.1
         with:
